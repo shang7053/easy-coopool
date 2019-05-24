@@ -29,7 +29,7 @@ class Scheduler(object):
                     logging.info('Cookies检测完成')
                     del tester
                     cookie_size = redis_conn.countbyname("cookies:" + website)
-                    logging.info("检测后可用cookie数量是{}个".format(cookie_size))
+                    logging.info("检测后可用cookie数量是{}个,当前设置告警阈值是{}".format(cookie_size,COOKIE_ALERM_SIZE))
                     # 验证cookie数量是否低于阈值
                     if cookie_size <= COOKIE_ALERM_SIZE:
                         # 低于阈值时先检测是否已发送告警，如果已发送并处于静默期则不发送，反之发送
