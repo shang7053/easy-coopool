@@ -19,7 +19,8 @@ chmod +x install.sh<br>
 sh install.sh<br>
 
 ## 运行
-python3 run.py
+开发环境：python3 run.py
+生产环境：uwsgi -d --ini coopool.ini 
 
 # 接口
 restfull接口,响应格式如下：<br>

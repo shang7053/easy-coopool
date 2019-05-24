@@ -16,4 +16,4 @@ ln -s /usr/include/openssl /usr/bin/ssl
 ./configure --with-ssl
 make && make install
 python3 -m pip install --upgrade pip
-pip3 install requests reids flask
+pip3 install requests reids flask uwsgi

@@ -34,9 +34,11 @@ def init_log():
                         format=log_format, handlers=hanlders)
 
 
-def main():
+def main(env, start_response):
     """
     程序主入口方法
+    :param env:
+    :param start_response:
     :return:
     """
     # 初始化日志
@@ -50,4 +52,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    main(None,None)
