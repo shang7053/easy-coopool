@@ -1,7 +1,6 @@
 # 调度类
-import time, os, traceback
+import time
 from multiprocessing import Process
-from bin.CookieRC import app
 from bin.BaseValidTester import *
 from conf.config import *
 from bin.EmailUtil import send_mail
@@ -56,15 +55,3 @@ class Scheduler(object):
         :return:
         """
         send_mail(alert_email, "【SmartJob招聘系统-Cookie池告警】", msg)
-
-    @staticmethod
-    def start_server():
-        """
-        启动服务器
-        :return:
-        """
-        try:
-            logging.info('API接口开始运行')
-            app.run(host=SERVER_HOST, port=SERVER_PORT)
-        except Exception as e:
-            logging.error(traceback.format_exc(e))

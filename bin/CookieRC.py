@@ -5,7 +5,7 @@ from bin.RedisDao import *
 
 __all__ = ['app']
 
-app = Flask("cookie_pool")
+app = Flask("easy-coopool")
 
 
 @app.route('/')

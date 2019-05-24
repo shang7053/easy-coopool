@@ -1,8 +1,9 @@
 # 程序主入口文件
-import logging, logging.handlers
+import logging, logging.handlers, traceback
 from bin.Scheduler import Scheduler
 from conf.config import *
 from bin.Scheduler import Process
+from bin.CookieRC import app
 
 
 def init_log():
@@ -34,22 +35,25 @@ def init_log():
                         format=log_format, handlers=hanlders)
 
 
-def main(env, start_response):
+# 初始化日志
+init_log()
+# 启动验证器
+valid_process = Process(target=Scheduler.valid_cookie)
+valid_process.start()
+
+
+def main():
     """
     程序主入口方法
-    :param env:
-    :param start_response:
     :return:
     """
-    # 初始化日志
-    init_log()
-    # 判断是否启动web服务
-    server_process = Process(target=Scheduler.start_server)
-    server_process.start()
-    # 判断是否启动验证器
-    valid_process = Process(target=Scheduler.valid_cookie)
-    valid_process.start()
+    try:
+        # 启动服务器
+        logging.info('API接口开始运行')
+        app.run(host=SERVER_HOST, port=SERVER_PORT)
+    except Exception as e:
+        logging.error(traceback.format_exc(e))
 
 
 if __name__ == '__main__':
-    main(None,None)
+    main()

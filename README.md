@@ -18,8 +18,18 @@ Flask>=0.12.1<br>
 chmod +x install.sh<br>
 sh install.sh<br>
 
+## 配置
+[uwsgi]<br>
+http = :8080<br>
+wsgi-file = run.py<br>
+callable = app<br>
+processes = 2<br>
+threads = 50<br>
+master = true<br>
+pidfile = coopool.pid<br>
+
 ## 运行
-开发环境：python3 run.py
+开发环境：python3 run.py<br>
 生产环境：uwsgi -d --ini coopool.ini 
 
 # 接口
