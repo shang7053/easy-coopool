@@ -98,8 +98,9 @@ class RedisClient(object):
         :return: 随机Cookies
         """
         logging.debug("random")
-        if len(self.db.hvals(self.name()))>0:
-            return random.choice();
+        values = self.db.hvals(self.name())
+        if len(values) > 0:
+            return random.choice(values);
         else:
             return "{}"
 
