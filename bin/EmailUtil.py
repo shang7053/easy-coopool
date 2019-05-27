@@ -45,5 +45,5 @@ def send_mail(to_addr, title, msg):
 
 
 if __name__ == "__main__":
-    send_mail("a@b.com", "【SmartJob招聘系统-Cookie池告警】",
-              "网站hyperloop，可以cookie只剩3个了，快去补充点吧")
+    send_mail("test@aa.com", "【Cookie池告警】",
+              "cookie只剩3个了，快去补充点吧")

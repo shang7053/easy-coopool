@@ -69,12 +69,36 @@ class RedisClient(object):
 
     def delete(self, key):
         """
-        （哈希表操作）根据键名删除键值对（自动填充哈希表表名）
+        （普通操作）根据键名删除键值对（自动填充哈希表表名）
         :param key: key
         :return: 删除结果
         """
         logging.debug("delete,key={}".format(key))
         return self.db.hdel(self.name(), key)
+
+    def delete_by_name(self, type, website):
+        """
+        （哈希表操作）根据键名删除键值对（手动填充哈希表表名）
+        :param type: type
+        :param website: website
+        :return: 删除结果
+        """
+        name = type + ":" + website
+        logging.debug("delete_by_name,name={}".format(name))
+        if self.db.delete(name) == 1:
+            for coo in self.all_by_name("cookies:" + website):
+                self.delete_by_name_key("cookies:" + website, coo)
+        return True
+
+    def delete_by_name_key(self, name, key):
+        """
+        （哈希表操作）根据键名删除键值对（手动填充哈希表表名）
+        :param name: name
+        :param key: key
+        :return: 删除结果
+        """
+        logging.debug("delete_by_name_key,name={} key={}".format(name, key))
+        return self.db.hdel(name, key)
 
     def count(self):
         """
@@ -129,6 +153,15 @@ class RedisClient(object):
         logging.debug("all")
         return self.db.hgetall(self.name())
 
+    def all_by_name(self, name):
+        """
+        （哈希表操作）获取所有键值对（手动填充哈希表表名）
+         :param name: name
+        :return: key和密码或Cookies的映射表
+        """
+        logging.debug("all_by_name")
+        return self.db.hgetall(name)
+
     def scan_iter(self, match_str):
         """
         （哈希表操作）获取所有匹配的key
@@ -153,10 +186,10 @@ if __name__ == '__main__':
     # logging.info(result)
     for item in conn.all():
         logging.info(item)
-    for item in conn.scan_iter("cookies*"):
+    for item in conn.scan_iter("accounts*"):
         logging.info(item)
         logging.info(str(item).split(":")[0])
         logging.info(str(item).split(":")[1])
-        for hkey in conn.hkeysbykey(item):
+        for hkey in conn.hkeys_by_name(item):
             logging.info(hkey)
             logging.info(conn.hget(item, hkey))

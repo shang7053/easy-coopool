@@ -43,19 +43,21 @@ status:状态1成功0失败<br>
 msg:状态说明<br>
 data:响应数据，根据不同接口数据类型不同
 ## 注册
-POST http://host:port/<website>/register<br>
+POST http://host:port/\<website\>/register<br>
 参数：<br>
 {<br>
   "validate_url":"http://host:port/index",<br>
   "alert_email":"a@c.com.b@d.com"<br>
 }<br>
 ## 添加
-POST http://host:port/<website>/add<br>
+POST http://host:port/\<website\>/add<br>
 参数：<br>
 {<br>
   "cookie":"_ga=GA1.2.2068545466.1534464283; xn_dvid_kf_20049=2FB1BB-5425381E-C994-6182-6357-5EC6070D830D; JSESSIONID=node01pvm6qovnp0o0126xk4nvddbm7384.node0"<br>
 }
 ## 获取
-GET http://host:port/<website>/random
+GET http://host:port/\<website\>/random
 ## 统计
-GET http://host:port/<website>/count
+GET http://host:port/\<website\>/count
+## 取消注册
+GET http://host:port/\<website\>/unregister

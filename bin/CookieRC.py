@@ -33,7 +33,7 @@ def random(website):
     try:
         g = get_conn(website, "cookies")
         cookies = getattr(g, website + '_cookies').random()
-        return json.dumps({'status': '0', 'msg': '成功', 'data': json.loads(cookies)})
+        return json.dumps({'status': '1', 'msg': '成功', 'data': json.loads(cookies)})
     except Exception as e:
         logging.error(traceback.format_exc(e))
         return json.dump({'status': '0', "msg": "程序异常"})
@@ -47,9 +47,11 @@ def converJsonStr(data: str):
     """
     ret = {}
     for coo in data.split(";"):
-        key = coo.split("=")[0]
-        value = coo.split("=")[1]
-        ret[key] = value
+        coo_arr = coo.split("=")
+        if len(coo_arr) == 2:
+            key = coo_arr[0]
+            value = coo_arr[1]
+            ret[key] = value
     return json.dumps(ret)
 
 
@@ -91,6 +93,25 @@ def register(website):
         alert_email = json_data["alert_email"]
         getattr(g, website + '_accounts').set("validate_url", validate_url)
         getattr(g, website + '_accounts').set("alert_email", alert_email)
+        return json.dumps({'status': '1', "msg": "成功"})
+    except Exception as e:
+        logging.error(traceback.format_exc(e))
+        return json.dump({'status': '0', "msg": "程序异常"})
+
+
+@app.route('/<website>/unregister', methods=["GET"])
+def unregister(website):
+    """
+    注册站点
+    :param website: 站点
+    :param validate_url: 验证url
+    :param alert_email: 告警收件人，多个以逗号分隔
+    :return:
+    """
+    logging.info("unregister，website={}".format(website))
+    try:
+        g = get_conn(website, "accounts")
+        getattr(g, website + '_accounts').delete_by_name("accounts", website);
         return json.dumps({'status': '1', "msg": "成功"})
     except Exception as e:
         logging.error(traceback.format_exc(e))
