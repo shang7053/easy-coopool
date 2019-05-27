@@ -50,14 +50,14 @@ POST http://host:port/\<website\>/register<br>
   "alert_email":"a@c.com.b@d.com"<br>
 }<br>
 ## 添加
-POST http://host:port/\<website\>/add<br>
+POST http://host:port/&lt;website&gt;/add<br>
 参数：<br>
 {<br>
   "cookie":"_ga=GA1.2.2068545466.1534464283; xn_dvid_kf_20049=2FB1BB-5425381E-C994-6182-6357-5EC6070D830D; JSESSIONID=node01pvm6qovnp0o0126xk4nvddbm7384.node0"<br>
 }
 ## 获取
-GET http://host:port/\<website\>/random
+GET http://host:port/&lt;website&gt;/random
 ## 统计
-GET http://host:port/\<website\>/count
+GET http://host:port/&lt;website&gt;/count
 ## 取消注册
-GET http://host:port/\<website\>/unregister
+GET http://host:port/&lt;website&gt;/unregister
