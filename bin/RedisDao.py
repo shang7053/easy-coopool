@@ -69,7 +69,7 @@ class RedisClient(object):
 
     def delete(self, key):
         """
-        （普通操作）根据键名删除键值对（自动填充哈希表表名）
+        （哈希表操作）根据键名删除键值对（自动填充哈希表表名）
         :param key: key
         :return: 删除结果
         """
@@ -99,6 +99,15 @@ class RedisClient(object):
         """
         logging.debug("delete_by_name_key,name={} key={}".format(name, key))
         return self.db.hdel(name, key)
+
+    def delete_key(self, key):
+        """
+        （普通操作）根据键名删除键值对（手动填充KEY）
+        :param key: key
+        :return: 删除结果
+        """
+        logging.debug("delete_key, key={}".format(key))
+        return self.db.delete(key)
 
     def count(self):
         """

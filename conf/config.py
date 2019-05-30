@@ -31,6 +31,8 @@ EMAIL_PWD = "Lumiai!@#"
 COOKIE_ALERM_SIZE = 1
 # cookie告警文本
 COOKIE_ALERM_TEXT = "您好，渠道KEY={}，当前可用cookie只剩{}个了，为避免系统爬取时无cookie可用请尽快补充，谢谢。"
+# cookie告警恢复文本
+COOKIE_HEALTH_TEXT = "您好，渠道KEY={}，cookie可用个数已恢复正常，当前可用cookie{}个。"
 # cookie告警静默时间，即发送一次告警后间隔多久再发下一次，单位秒
 COOKIE_ALERM_QUIET_TIME = 4 * 60 * 60
 # -----------------------end-----------------------
